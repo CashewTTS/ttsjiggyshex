@@ -544,7 +544,7 @@ class Polygon(object):
 		return output
 
 	@staticmethod
-	def convex_decompose(polygon, holes=[], debug_callback=None):
+	def convex_decompose(polygon, holes=[], debug_callback=None, max_vertices=None):
 		"""Decompose a polygon into convex parts
 
 		Reference:
@@ -557,13 +557,18 @@ class Polygon(object):
 
 		@type holes: List
 		@param holes: A list of polygons inside of polygon to be considered as holes
+
+		@type max_vertices: int
+		@param max_vertices: Limit the number of vertices in each output polygon.
 		"""
+
+		assert max_vertices is None or max_vertices >= 3
 
 		def dbg(p, c, t):
 			if debug_callback: debug_callback(p,c,t)
 
 		if polygon.is_self_intersecting(): return []
-		if polygon.is_convex() and not holes: return [polygon]
+		if polygon.is_convex() and not holes and not (max_vertices is not None and len(polygon) > max_vertices): return [polygon]
 
 		if not polygon.is_clockwise(): polygon = polygon.clone().flip()
 
@@ -689,7 +694,7 @@ class Polygon(object):
 
 			# remove elements from the end of l until we have a valid decomposition
 			p_minus_l = [k for k in range(len(p)) if k not in l]
-			while len(l) > 2 and not check_decomp(l, p_minus_l, p):
+			while len(l) > 2 and ((max_vertices is not None and len(l) > max_vertices) or not check_decomp(l, p_minus_l, p)):
 				l_pop = l.pop()
 				p_minus_l.insert(0, l_pop)
 
@@ -706,7 +711,7 @@ class Polygon(object):
 
 			# remove elements from the start of l until we have a valid decomposition
 			p_minus_l = [k for k in range(len(p)) if k not in l]
-			while len(l) > 2 and not check_decomp(l, p_minus_l, p):
+			while len(l) > 2 and ((max_vertices is not None and len(l) > max_vertices) or not check_decomp(l, p_minus_l, p)):
 				p_minus_l.append(l[0])
 				del l[0]
 
@@ -753,6 +758,13 @@ class Polygon(object):
 
 
 		if len(p) >= 3:
+			while max_vertices is not None and len(p) > max_vertices:
+				l = list(range(max_vertices))
+				out.append(Polygon.from_pointlist([p[k] for k in l]))
+				for v in sorted(l[1:-1], reverse=True):
+					dbg(p[v], (255,0,255), "del %d" % g.del_index)
+					g.del_index += 1
+					del p[v]
 			out.append(Polygon.from_pointlist(p))
 		elif len(p) > 0:
 			raise Exception("There are some points left over: %s" % p)
