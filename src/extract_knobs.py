@@ -1,5 +1,4 @@
 from collections import defaultdict
-import matplotlib.pyplot as plt
 import pathlib
 
 
@@ -118,6 +117,7 @@ def main(show_plot=False):
     for filepath in pathlib.Path('../../ttsjigsawjoin/dist/jigsaw-templates').glob('jigsaw-*x*-3/piece.*.obj'):
         knobs.extend(get_knobs(unextrude(filepath)))
     if show_plot:
+        import matplotlib.pyplot as plt
         for knob in knobs:
             knob_with_ends = [(0, 0)] + knob + [(1, 0)]
             plt.plot([p[0] for p in knob_with_ends], [p[1] for p in knob_with_ends])

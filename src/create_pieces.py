@@ -3,7 +3,6 @@ import random
 import itertools
 import pathlib
 import py2d
-import matplotlib.pyplot as plt
 
 
 # Efficiently iterate over overlapping pairs including (last, first), e.g.:
@@ -409,6 +408,7 @@ def make_puzzle(width, height, seed, knob_func, save_path, host_url, show_plot=F
                              piece_centers, rotations)
 
     if show_plot:
+        import matplotlib.pyplot as plt
         for polygon in piece_polygons + [board_polygon]:
             polygon_closed = polygon + polygon[:1]
             plt.plot([p[0] for p in polygon_closed], [p[1] for p in polygon_closed])
