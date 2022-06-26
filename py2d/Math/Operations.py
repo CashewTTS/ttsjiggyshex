@@ -1,7 +1,5 @@
 # cython: language_level=3
 
-import math
-
 from py2d.Math.Vector import *
 
 def __intersect_line_line_u(p1, p2, q1, q2):

@@ -1,8 +1,6 @@
 # cython: language_level=3
 
-import math
-
-from py2d.Math.Vector import *
+from py2d.Math.Polygon import *
 
 class Transform(object):
 	"""Class for representing affine transformations"""
@@ -57,13 +55,11 @@ class Transform(object):
 		                  [ 0, 0, 1]])
 
 	def __add__(self, b):
-		t = Transform()
-		t.data = [[self.data[x][y] + b.data[x][y] for y in range(3)] for x in range(3)]
+		t = Transform([[self.data[x][y] + b.data[x][y] for y in range(3)] for x in range(3)])
 		return t
 
 	def __sub__(self, b):
-		t = Transform()
-		t.data = [[self.data[x][y] - b.data[x][y] for y in range(3)] for x in range(3)]
+		t = Transform([[self.data[x][y] - b.data[x][y] for y in range(3)] for x in range(3)])
 		return t
 
 	def __mul__(self, val):

@@ -1,10 +1,8 @@
 # cython: language_level=3
 
-import math
 import itertools
 from collections import defaultdict
 
-from py2d.Math.Vector import *
 from py2d.Math.Operations import *
 
 def tip_decorator_pointy(a,b,c,d,is_cw):
@@ -698,7 +696,7 @@ class Polygon(object):
 			#print "l'=%s" % l
 
 			# try to extend l counter-clockwise - find next notch
-			i_extend2 = next( ( i for i in itertools.chain((i_start,-1,-1), range(len(p)-1,i_start, -1)) if not point_orientation( p[i-1], p[i], p[(i+1) % len(p)] ) ) )
+			i_extend2 = next( ( i for i in itertools.chain(range(i_start,-1,-1), range(len(p)-1,i_start, -1)) if not point_orientation( p[i-1], p[i], p[(i+1) % len(p)] ) ) )
 
 			l2 =  list(range(i_extend2,len(p))) + list(range(0,i_start)) if i_extend2 > i_start else list(range(i_extend2,i_start))
 

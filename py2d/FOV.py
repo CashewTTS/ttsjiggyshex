@@ -12,7 +12,7 @@ class Vision:
 	The vision polygon will be cached as long as the eye position and obstructors don't change.
 
 		>>> obs = [[ py2d.Math.Vector(2,4), py2d.Math.Vector(4, 1), py2d.Math.Vector(7, -2) ],
-		...        [ py2d.py2d.Math.Vector(1,-2), py2d.Math.Vector(6, -3) ],
+		...        [ py2d.Math.Vector(1,-2), py2d.Math.Vector(6, -3) ],
 		...	   [ py2d.Math.Vector(2.5,5), py2d.Math.Vector(3, 4) ]]
 		>>> radius = 20
 		>>> eye = py2d.Math.Vector(0,0)

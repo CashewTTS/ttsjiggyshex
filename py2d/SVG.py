@@ -10,9 +10,8 @@ Testing files were generated using Inkscape. Make sure to use "Make selected nod
 from xml.etree import ElementTree
 import re
 import warnings
-from collections import deque
 from py2d.Math import Polygon, Vector, Transform
-from py2d.Bezier import flatten_cubic_bezier, flatten_quadratic_bezier
+from py2d.Bezier import flatten_cubic_bezier
 
 def convert_svg(f, transform=Transform.unit(), bezier_max_divisions=None, bezier_max_flatness=0.1):
 	"""Convert an SVG file to a hash of Py2D Polygons.

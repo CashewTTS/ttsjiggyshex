@@ -1,7 +1,6 @@
 # cython: language_level=3
 
 import math
-from collections import defaultdict
 
 class Vector(object):
 	"""Class for 2D Vectors.
@@ -34,7 +33,7 @@ class Vector(object):
 
 	def get_length_squared(self):
 		"""Get the squared length of the vector, not calculating the square root for a performance gain"""
-		return self.x * self.x + self.y * self.y;
+		return self.x * self.x + self.y * self.y
 
 	def get_slope(self):
 		"""Get the slope of the vector, or float('inf') if x == 0"""

@@ -147,13 +147,13 @@ def convert_tilemap(width, height, blocking_function, tile_width, tile_height):
 
 				if right == cluster and top != cluster:
 					# everything is fine, follow along the path
-					x += 1;
+					x += 1
 				elif top == cluster:
 					# we have a cluster member at the top. 
 					# go up now and add top-left corner to outline
 					direction = 3
 					outline.append(Math.Vector((x) * tile_width, (y) * tile_height))
-					y -= 1;
+					y -= 1
 				else:
 					# we have no more cluster members to the right. 
 					# go down now and add top-right corner to outline
@@ -165,13 +165,13 @@ def convert_tilemap(width, height, blocking_function, tile_width, tile_height):
 
 				if bottom == cluster and right != cluster:
 					# everything is fine, follow along the path
-					y += 1;
+					y += 1
 				elif right == cluster:
 					# we have a cluster member to the right.
 					# go right now and add top-right corner to outline
 					direction = 0
 					outline.append(Math.Vector((x+1) * tile_width, (y) * tile_height))
-					x += 1;
+					x += 1
 				else:
 					# we have no more cluster members at the bottom.
 					# go left now and add bottom-right corner to outline
@@ -189,7 +189,7 @@ def convert_tilemap(width, height, blocking_function, tile_width, tile_height):
 					# go down now and add bottom-right corner to outline
 					direction = 1
 					outline.append(Math.Vector((x+1) * tile_width, (y+1) * tile_height))
-					y += 1;
+					y += 1
 				else:
 					# we have no more cluster members at the left.
 					# go up now and add bottom-left corner to outline
@@ -206,7 +206,7 @@ def convert_tilemap(width, height, blocking_function, tile_width, tile_height):
 					# go left now and add bottom-left corner to outline
 					direction = 2
 					outline.append(Math.Vector((x) * tile_width, (y+1) * tile_height))
-					x -= 1;
+					x -= 1
 				else:
 					# we have no more cluster members at the top.
 					# go right now and add top-left corner to outline
